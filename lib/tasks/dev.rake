@@ -21,7 +21,7 @@ namespace :dev do
     # Incomes past month
     3.times { create :income, user: user, date: "2024-01-" + rand(1..28).to_s }
 
-    user2 = User.create!(username: "bilbomoneybaggins", email: "moneybaggins@bigbanktakelilbank.doge")
+    user2 = User.create!(username: "bilbomoneybaggins", id: 3, email: "moneybaggins@bigbanktakelilbank.doge")
     # Expenses
     26.times { create :expense, user: user2, date: "2024-02-" + rand(1..28).to_s }
     # Expenses past month
