@@ -44,7 +44,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "pry"
   gem "byebug"
-  gem "standardrb"
+  # gem "standardrb"
   gem "rspec-rails"
   gem "shoulda-matchers"
   gem "simplecov"

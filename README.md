@@ -60,7 +60,8 @@ type Mutation {
 ensure you have `rails@3.2.2` installed<br>
 ensure you have `postgresql@14.0+` installed<br>
 exec `bundle install` from project root<br>
-exec `rails db:{drop,create,migrate,seed}` to initiate database<br>
+exec `rails db:{drop,create,migrate}` to initiate database<br>
+exec `rails dev:seed` to initiate dev seeds<br>
 exec `rails server` to start local dev
 
 ## Testing

@@ -5,7 +5,7 @@ FactoryBot.define do
     association :user
 
     source { Faker::Commerce.brand }
-    amount { Faker::Number.positive(from: 781, to: 9999) }
+    amount { Faker::Number.positive(from: 150000, to: 200000) }
     date { Faker::Date.between(from: 100.days.ago, to: Date.today) }
   end
 end
