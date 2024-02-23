@@ -22,34 +22,26 @@ class User < ApplicationRecord
   end
 
   def cash_flows
-    amounts = User.find_by_sql("SELECT
-                        EXTRACT(YEAR FROM incomes.date) AS year,
-                        TO_CHAR(incomes.date, 'Month') AS month,
-                        SUM(incomes.amount) AS total_income,
-                        SUM(expenses.amount) AS total_expense
-                      FROM incomes
-                      FULL JOIN expenses
-                        ON EXTRACT(YEAR FROM expenses.date) = EXTRACT(YEAR FROM incomes.date)
-                        AND EXTRACT(MONTH FROM expenses.date) = EXTRACT(MONTH FROM incomes.date)
-                        AND expenses.user_id = incomes.user_id
-                      WHERE incomes.user_id = #{id}
-                      GROUP BY year, month
-                      ORDER BY year, month;")
-
-    amounts.map do |amount|
-      amount.month.strip!
-      if amount.total_income.nil?
-        amount.total_income = 0
-      end
-
-      if amount.total_expense.nil?
-        amount.total_expense = 0
-      end
-    end
-    # select amount and date from income and expenses
-    # pull month and year from date and print month as a word
-    # sum amounts on each table
-    # join expenses and incomes where user_id = id and month and yeat match
-    amounts
+    User.find_by_sql("SELECT 
+    EXTRACT(YEAR FROM date) AS year,
+    TO_CHAR(date, 'Month') AS month,
+    COALESCE(SUM(CASE WHEN type = 'income' THEN amount END), 0) AS total_income,
+    COALESCE(SUM(CASE WHEN type = 'expense' THEN amount END), 0) AS total_expense
+    FROM (
+      SELECT 'income' AS type, date, amount
+        FROM incomes
+        WHERE user_id = 3
+      UNION ALL
+      SELECT 'expense' AS type, date, amount
+        FROM expenses
+        WHERE user_id = 3
+    ) AS transactions
+    GROUP BY year, month
+    ORDER BY year, month;")
+    # select year and month
+    # sum when type is income or type is expense with total_x as alias
+    # coalesce to set values as 0 if null value found
+    # subquery: select income/expense with type alias, date and amount where the user_id is equal to id
+    # group by and order by year, then month
   end
 end
