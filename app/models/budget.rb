@@ -32,6 +32,9 @@ class Budget < ApplicationRecord
   private
 
   def amount_spent
-    Expense.where(category: category).sum(:amount)
+    budget_month = self.month
+    start_date = Date.parse("#{budget_month}-01")
+    end_date = start_date.end_of_month
+    Expense.where(category: category, date: start_date..end_date).sum(:amount)
   end
 end
