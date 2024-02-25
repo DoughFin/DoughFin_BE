@@ -16,6 +16,7 @@ RSpec.describe "Get Transactions", type: :request do
             date
             status
             vendor
+            category
           }
         }
       }
@@ -48,6 +49,9 @@ RSpec.describe "Get Transactions", type: :request do
 
       expect(transaction).to have_key(:status)
       expect(transaction[:status]).to be_a String
+
+      expect(transaction).to have_key(:category)
+      expect(transaction[:category]).to be_a String
     end
   end
 

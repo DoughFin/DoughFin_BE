@@ -11,14 +11,17 @@ class User < ApplicationRecord
                              amount,
                              source AS vendor,
                              date,
+                             'income' AS category,
                              'credited' AS status FROM incomes WHERE user_id = #{id}
                       UNION
                       SELECT id,
                              amount,
                              vendor,
                              date,
+                             category,
                              'debited' AS status FROM expenses WHERE user_id = #{id}
                       ORDER BY date DESC")
+
   end
 
   def cash_flows
@@ -30,11 +33,11 @@ class User < ApplicationRecord
     FROM (
       SELECT 'income' AS type, date, amount
         FROM incomes
-        WHERE user_id = 3
+        WHERE user_id = #{id}
       UNION ALL
       SELECT 'expense' AS type, date, amount
         FROM expenses
-        WHERE user_id = 3
+        WHERE user_id = #{id}
     ) AS transactions
     GROUP BY year, month
     ORDER BY year, month;")
