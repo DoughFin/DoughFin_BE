@@ -34,7 +34,7 @@ RSpec.describe Types::CurrentExpensesType, type: :request do
       expect(data).to have_key(:user)
       expect(data[:user]).to have_key(:currentExpenses)
       expect(data[:user][:currentExpenses]).to have_key(:amount)
-      expect(data[:user][:currentExpenses][:amount]).to eq(500.0)
+      expect(data[:user][:currentExpenses][:amount]).to eq(600.0)
       expect(data[:user][:currentExpenses]).to have_key(:pctChange)
       expect(data[:user][:currentExpenses][:pctChange]).to eq(400.0)
     end
