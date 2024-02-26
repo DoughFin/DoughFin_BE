@@ -63,11 +63,11 @@ class User < ApplicationRecord
   end
 
   def current_month_income
-    incomes.where("date >= ? AND date <= ?", Date.today.at_beginning_of_month, Date.today.at_end_of_month).sum(:amount)
+    incomes.sum(:amount)
   end
 
   def current_month_expense
-    expenses.where("date >= ? AND date <= ?", Date.today.at_beginning_of_month, Date.today.at_end_of_month).sum(:amount)
+    expenses.sum(:amount)
   end
 
   def current_incomes
