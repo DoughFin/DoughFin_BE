@@ -10,7 +10,7 @@ class DateValidator < ActiveModel::EachValidator
   end
 end
 
-class Event < ApplicationRecord
-  # Using the custom validator
-  validates :start_date, date: true
-end
+# class Event < ApplicationRecord
+#   # Using the custom validator
+#   validates :start_date, date: true
+# end

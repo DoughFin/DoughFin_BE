@@ -47,4 +47,40 @@ class User < ApplicationRecord
     # subquery: select income/expense with type alias, date and amount where the user_id is equal to id
     # group by and order by year, then month
   end
+
+  def incomes_pct_change
+    current_month_income = incomes.where("date >= ? AND date <= ?", Date.today.at_beginning_of_month, Date.today.at_end_of_month).sum(:amount)
+    previous_month_income = incomes.where("date >= ? AND date <= ?", 1.month.ago.at_beginning_of_month, 1.month.ago.at_end_of_month).sum(:amount)
+
+    (previous_month_income.zero? ? 0 : (current_month_income - previous_month_income) / previous_month_income.to_f) * 100
+  end
+
+  def expenses_pct_change
+    current_month_expense = expenses.where("date >= ? AND date <= ?", Date.today.at_beginning_of_month, Date.today.at_end_of_month).sum(:amount)
+    previous_month_expense = expenses.where("date >= ? AND date <= ?", 1.month.ago.at_beginning_of_month, 1.month.ago.at_end_of_month).sum(:amount)
+
+    pct_change = (previous_month_expense.zero? ? 0 : (current_month_expense - previous_month_expense) / previous_month_expense.to_f) * 100
+  end
+
+  def current_month_income
+    incomes.sum(:amount)
+  end
+
+  def current_month_expense
+    expenses.sum(:amount)
+  end
+
+  def current_incomes
+    {
+      amount: current_month_income,
+      pctChange: incomes_pct_change
+    }
+  end
+
+  def current_expenses
+    {
+      amount: current_month_expense,
+      pctChange: expenses_pct_change
+    }
+  end
 end
