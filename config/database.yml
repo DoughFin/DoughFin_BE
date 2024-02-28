@@ -12,6 +12,19 @@
 # Configure Using Gemfile
 # gem "pg"
 #
+
+production:
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= Rails.application.credentials.postgresql[:username] %>
+  password: <%= Rails.application.credentials.postgresql[:password] %>
+  database: <%= Rails.application.credentials.postgresql[:database] %>
+  host: <%= Rails.application.credentials.postgresql[:host] %>
+  port: <%= Rails.application.credentials.postgresql[:port] %>
+
+
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -77,6 +90,6 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-production:
-  <<: *default
-  url: <%= Rails.application.credentials.DATABASE_URL %>
+# production:
+#   <<: *default
+#   url: <%= Rails.application.credentials.DATABASE_URL %>
