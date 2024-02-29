@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   end
 
   def export
-    send_data User.to_csv, filename: "users-#{Date.today}.csv", disposition: 'attachment'
+    send_data User.to_csv, filename: "transactions-#{Date.today}.csv", disposition: 'attachment'
   end
 
   private

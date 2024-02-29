@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   describe "GET #export" do
     before do
-      User.create(username: "moneybaggins", id: 1, email: "moneybaggins@bigbanktakelilbank.doge")
+      user = User.create(username: "moneybaggins", id: 1, email: "moneybaggins@bigbanktakelilbank.doge")
+      user.expenses = create_list(:expense, 5)
+      user.incomes = create_list(:income, 5)
+      transactions = JSON.parse(user.transactions.to_json, symbolize_names: true)
       get :export
     end
 

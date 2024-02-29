@@ -87,13 +87,12 @@ class User < ApplicationRecord
   end
 
   def self.to_csv
-    attributes = %w{id email}
-    binding.pry
+    attributes = %w[id amount vendor date category status]
 
     CSV.generate(headers:true) do |csv|
       csv << attributes
-      all.find_each do |user|
-        csv << attributes.map{|attr| user.send(attr)}
+      JSON.parse(all.first.transactions.to_json).each do |transaction|
+        csv << [transaction["id"], transaction["amount"], transaction["vendor"], transaction["date"], transaction["category"], transaction["status"]]
       end
     end
   end
