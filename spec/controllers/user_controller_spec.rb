@@ -3,9 +3,7 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   describe "GET #export" do
     before do
-      # Create some test users
       User.create(username: "moneybaggins", id: 1, email: "moneybaggins@bigbanktakelilbank.doge")
-      # Trigger the export action
       get :export
     end
 
