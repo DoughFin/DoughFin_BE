@@ -86,7 +86,8 @@ class User < ApplicationRecord
     }
   end
 
-  def self.to_csv
+  def self.transactions_to_csv
+    user = all.first
     attributes = %w[id amount vendor date category status]
 
     CSV.generate(headers:true) do |csv|
@@ -96,4 +97,5 @@ class User < ApplicationRecord
       end
     end
   end
+
 end
