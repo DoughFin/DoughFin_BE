@@ -43,4 +43,14 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'csv conversion method' do
+    it 'is a usable method test' do
+      user = User.create(username: "moneybaggins", email: "moneybaggins@bigbanktakelilbank.doge")
+      user.expenses = create_list(:expense, 5)
+      user.incomes = create_list(:income, 5)
+      binding.pry
+      expect(user.to_csv).to eq(true)
+    end
+  end
 end
