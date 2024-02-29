@@ -88,6 +88,7 @@ class User < ApplicationRecord
 
   def self.to_csv
     attributes = %w{id email}
+    binding.pry
 
     CSV.generate(headers:true) do |csv|
       csv << attributes
