@@ -70,3 +70,15 @@ exec `bundle exec rspec` after you've installed the app.
 ## Acknowledgments
 Thank you to all the contributors who have helped shape DoughFin.
 Special thanks to our users for trusting us with their financial management needs.
+
+Shawn Carpenter: [Email](shawncarpenter.co@gmail.com) [LinkedIn](https://www.linkedin.com/in/shawndcarpenter/)
+
+Joseph Lee: [Email](jhjlee702@gmail.com)
+
+Mary Bruff: [Email](marybruff5@gmail.com)
+
+Taylor Pubins: [Email](tpubz@icloud.com)
+
+Anthea Yur: [Email](acyur6@gmail.com)
+
+Ben Rosner: [Email](ben.rosner.williamsburg@gmail.com)
