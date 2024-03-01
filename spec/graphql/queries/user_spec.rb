@@ -18,6 +18,9 @@ RSpec.describe "Users", type: :request do
   it "returns a user by email" do
     post "/graphql", params: {query: query, variables: {email: user.email}}
 
+    expect{post "/graphql", params: {query: query, variables: {email: user.email}}}
+      .to perform_under(200).ms
+
     expect(response).to be_successful
       
     json = JSON.parse(response.body, symbolize_names: true)
@@ -43,6 +46,9 @@ RSpec.describe "Users", type: :request do
     user.budgets.create(category: "rent", month: "2024-02", amount: 1000)
     post "/graphql", params: {query: budget_categories, variables: {email: user.email}}
 
+    expect{post "/graphql", params: {query: budget_categories, variables: {email: user.email}}}
+      .to perform_under(200).ms
+
     expect(response).to be_successful
 
     json = JSON.parse(response.body, symbolize_names: true)
@@ -57,6 +63,8 @@ RSpec.describe "Users", type: :request do
     it "must have a user" do
       post "/graphql", params: {query: query, variables: {email: "not_a_real_email@email.com"}}
 
+      expect{post "/graphql", params: {query: query, variables: {email: "not_a_real_email@email.com"}}}
+      .to perform_under(50).ms
       expect(response).to be_successful # graphql responses should always be successful, even when an error occurs
       
       json = JSON.parse(response.body, symbolize_names: true)

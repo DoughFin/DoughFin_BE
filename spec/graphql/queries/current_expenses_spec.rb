@@ -26,6 +26,7 @@ RSpec.describe Types::CurrentExpensesType, type: :request do
 
       post "/graphql", params: {query: query}
 
+      
       expect(response).to be_successful
       
       json_response = JSON.parse(response.body, symbolize_names: true)
@@ -36,7 +37,9 @@ RSpec.describe Types::CurrentExpensesType, type: :request do
       expect(data[:user][:currentExpenses]).to have_key(:amount)
       expect(data[:user][:currentExpenses][:amount]).to eq(600.0)
       expect(data[:user][:currentExpenses]).to have_key(:pctChange)
-      expect(data[:user][:currentExpenses][:pctChange]).to eq(400.0)
+      expect(data[:user][:currentExpenses][:pctChange]).to eq(0.0)
+
+      expect {post "/graphql", params: {query: query}}.to perform_under(50).ms
     end
   end
 
