@@ -8,7 +8,6 @@ DoughFin is a user-friendly financial management app designed to help individual
 **Expense Categorization:** Automatically categorize your expenses for a clearer understanding of your spending habits.<br>
 **Budget Creation:** Set up personalized budgets to control your spending and achieve your financial goals.<br>
 **Insightful Reports:** Get detailed reports and insights into your financial health, helping you make better financial decisions.<br>
-**Secure Account Linking:** Safely link your bank account(s) for real-time transaction updates.
 
 ## Endpoint Testing
 [Postman Environment](https://turing-school-of-software-and-design-student-plan-team-2.postman.co/workspace/8ddf4dac-97e4-442b-8e86-5b3d49e18134)
@@ -66,6 +65,20 @@ exec `rails server` to start local dev
 
 ## Testing
 exec `bundle exec rspec` after you've installed the app.
+
+## Gems
+The [GraphQL](https://graphql-ruby.org/) gem was used to integrate GraphQL queries between our backend and frontend applications.
+
+The [Shoulda Matchers Gem](https://github.com/thoughtbot/shoulda-matchers) is used for one-liner testing of models.
+
+The [SimpleCov Gem](https://github.com/simplecov-ruby/simplecov) provides test coverage analysis for our application.
+
+The [FactoryBot](https://github.com/thoughtbot/factory_bot) and [Faker Gems](https://github.com/faker-ruby/faker) was used to create large amounts of data for testing and rake task development. 
+
+The [Pry gem](https://github.com/pry/pry) and [RSpec Rails](https://github.com/rspec/rspec-rails) within the testing environment for unit and feature testing.
+
+[RSpec Benchmark](https://github.com/piotrmurach/rspec-benchmark) was used for performance testing.
+
 
 ## Acknowledgments
 Thank you to all the contributors who have helped shape DoughFin.
