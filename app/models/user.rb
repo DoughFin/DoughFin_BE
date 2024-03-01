@@ -1,3 +1,5 @@
+require 'csv'
+
 class User < ApplicationRecord
   has_many :expenses
   has_many :incomes
@@ -83,4 +85,17 @@ class User < ApplicationRecord
       pctChange: expenses_pct_change
     }
   end
+
+  def self.transactions_to_csv
+    user = all.first
+    attributes = %w[id amount vendor date category status]
+
+    CSV.generate(headers:true) do |csv|
+      csv << attributes
+      JSON.parse(all.first.transactions.to_json).each do |transaction|
+        csv << [transaction["id"], transaction["amount"], transaction["vendor"], transaction["date"], transaction["category"], transaction["status"]]
+      end
+    end
+  end
+
 end

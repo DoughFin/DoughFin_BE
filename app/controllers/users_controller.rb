@@ -38,6 +38,10 @@ class UsersController < ApplicationController
     @user.destroy!
   end
 
+  def export
+    send_data User.transactions_to_csv, filename: "transactions-#{Date.today}.csv", disposition: 'attachment'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
