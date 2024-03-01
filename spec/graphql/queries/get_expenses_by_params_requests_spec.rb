@@ -70,6 +70,9 @@ RSpec.describe "Get Expenses by Params", type: :request do
 
       post "/graphql", params: {query: query, variables: {email: "not_a_real_email@email.com", category: "Groceries", month: "2024-02"}}
 
+      expect{post "/graphql", params: {query: query, variables: {email: "not_a_real_email@email.com", category: "Groceries", month: "2024-02"}}}
+      .to perform_under(50).ms
+
       expect(response).to be_successful # graphql responses should always be successful, even when an error occurs
       
       json = JSON.parse(response.body, symbolize_names: true)
