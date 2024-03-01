@@ -20,12 +20,18 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "contains the correct data in the CSV file" do
-      expected_csv = "id,email\n1,moneybaggins@bigbanktakelilbank.doge\n"
-      expect(response.body).to eq(expected_csv)
+      expected_csv = "id,amount,vendor,date,category,status\n"
+      expect(response.body).to include(expected_csv)
+      expect(response.body).to include("income,credited")
+    
+      income_count = response.body.scan(/income/).count
+      newline_count = response.body.scan("\n").count
+      expect(income_count).to eq(5)
+      expect(newline_count).to eq(11)
     end
 
     it "sets the correct file name" do
-      expect(response.header['Content-Disposition']).to include "users-#{Date.today}.csv"
+      expect(response.header['Content-Disposition']).to include "transactions-#{Date.today}.csv"
     end
   end
 end
